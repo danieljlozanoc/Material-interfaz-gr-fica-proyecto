@@ -31,65 +31,64 @@ C_YELLOW = QColor("#d4a800")
 PLAYER_COLORS = {"red":C_RED,"blue":C_BLUE,"green":C_GREEN,"yellow":C_YELLOW}
 
 # ---------------------------------------------------------------------------
-# TRACK CIRCULAR — 64 posiciones absolutas → grid 15×15
-# Posición absoluta = (pos_rel + offset_color) % 64
-# Offsets: red=0, blue=34, green=17, yellow=51
+# FIX 1: TRACK_GRID con coordenadas exactas del tablero imagen
+# Casillas 0-63 del track circular
 # ---------------------------------------------------------------------------
 TRACK_GRID = [
     (9, 12),  # 0  - salida roja
     (9, 11),  # 1
-    (10, 11), # 2
+    (10,11),  # 2
     (9, 10),  # 3
-    (10, 10), # 4
-    (11, 10), # 5
+    (10,10),  # 4
+    (11,10),  # 5
     (11, 9),  # 6
     (12, 9),  # 7
-    (12, 10), # 8
+    (12,10),  # 8
     (13, 9),  # 9
-    (13, 10), # 10
+    (13,10),  # 10
     (14, 9),  # 11
     (14, 7),  # 12
     (14, 6),  # 13
     (14, 5),  # 14
-    (13, 6),  # 15
-    (13, 5),  # 16
+    (13, 5),  # 15
+    (13, 6),  # 16
     (12, 6),  # 17
     (11, 6),  # 18
     (10, 6),  # 19
     (10, 5),  # 20
-    (9, 5),   # 21
-    (9, 4),   # 22
+    (9,  5),  # 21
+    (9,  4),  # 22
     (10, 3),  # 23
-    (9, 3),   # 24
+    (9,  3),  # 24
     (10, 2),  # 25
-    (9, 2),   # 26
+    (9,  2),  # 26
     (10, 1),  # 27
-    (9, 0),   # 28
-    (7, 0),   # 29
-    (5, 0),   # 30
-    (5, 1),   # 31
-    (6, 2),   # 32
-    (5, 2),   # 33
-    (5, 3),   # 34 - salida azul
-    (4, 3),   # 35
-    (5, 4),   # 36
-    (4, 4),   # 37
-    (5, 5),   # 38
-    (4, 5),   # 39
-    (3, 5),   # 40
-    (3, 6),   # 41
-    (2, 5),   # 42
-    (2, 6),   # 43
-    (1, 5),   # 44
-    (0, 5),   # 45
-    (0, 7),   # 46
-    (0, 9),   # 47
-    (1, 9),   # 48
+    (9,  0),  # 28
+    (7,  0),  # 29
+    (5,  0),  # 30
+    (5,  1),  # 31
+    (6,  2),  # 32
+    (5,  2),  # 33
+    (5,  3),  # 34  ← salida azul (offset 34)
+    (4,  3),  # 35
+    (5,  4),  # 36
+    (4,  4),  # 37
+    (5,  5),  # 38
+    (4,  5),  # 39
+    (3,  5),  # 40
+    (3,  6),  # 41
+    (2,  5),  # 42
+    (2,  6),  # 43
+    (1,  5),  # 44
+    (0,  5),  # 45
+    (0,  7),  # 46
+    (0,  9),  # 47
+    (1,  9),  # 48
     (1, 10),  # 49
-    (2, 9),   # 50
-    (3, 9),   # 51
+    (2,  9),  # 50
+    (3,  9),  # 51
     (3, 10),  # 52
-    (4, 9),   # 53
+    (4,  9),  # 53
     (4, 10),  # 54
     (5, 10),  # 55
     (5, 11),  # 56
@@ -102,7 +101,7 @@ TRACK_GRID = [
     (7, 14),  # 63
 ]
 
-# Offset de cada jugador en el track absoluto
+# Offset de cada jugador en el track absoluto (igual que game_engine)
 PLAYER_OFFSET = {"red": 0, "blue": 34, "green": 17, "yellow": 51}
 
 # Cárceles — grid coords para 4 fichas por color
@@ -116,27 +115,27 @@ JAIL_GRID = {
 FINAL_PATH = 70
 
 # ---------------------------------------------------------------------------
-# CAMINOS FINALES — posiciones 64-70 por color (grid col, row)
-# pos_rel 64 = primera casilla del carril final, 70 = meta central
+# FIX 1 (cont.): CAMINO FINAL con coordenadas exactas del tablero imagen
+# pos_rel 64-69 = carril final, 70 = meta central
 # ---------------------------------------------------------------------------
 FINAL_TRACK = {
-    "red": [
-        (8, 14),  # 64
-        (7, 13),  # 65
-        (8, 12),  # 66
-        (7, 12),  # 67
-        (8, 11),  # 68
-        (7, 11),  # 69
-        (7, 10),  # 70 - meta
-    ],
     "blue": [
-        (7, 1),   # 64
-        (8, 1),   # 65
-        (7, 2),   # 66
-        (8, 2),   # 67
-        (7, 3),   # 68
-        (7, 4),   # 69
-        (8, 4),   # 70 - meta
+        (7, 1),  # 64
+        (8, 1),  # 65
+        (7, 2),  # 66
+        (8, 2),  # 67
+        (7, 3),  # 68
+        (7, 4),  # 69
+        (8, 4),  # 70 - meta azul
+    ],
+    "red": [
+        (8, 14), # 64
+        (7, 13), # 65
+        (8, 13), # 66
+        (7, 12), # 67
+        (8, 12), # 68
+        (8, 11), # 69
+        (7, 11), # 70 - meta roja (centro)
     ],
 }
 
@@ -170,21 +169,19 @@ def grid_to_px(col, row):
     return int((col+0.5)*CELL), int((row+0.5)*CELL)
 
 def pos_to_px(color, pos_rel):
-    """pos_rel (0-70) → píxeles, aplicando offset y camino final por color."""
+    """pos_rel → píxeles. Aplica offset del jugador y camino final."""
     if pos_rel < 0:
         return None
-    if pos_rel >= FINAL_PATH:
-        return grid_to_px(7, 7)
+    # Camino final (64-69) y meta (70)
     if pos_rel >= 64:
         track = FINAL_TRACK.get(color)
-        if track is None:
-            return grid_to_px(7, 7)
-        idx = min(pos_rel - 64, len(track) - 1)
-        col, row = track[idx]
-        return grid_to_px(col, row)
+        if track:
+            idx = min(pos_rel - 64, len(track) - 1)
+            return grid_to_px(*track[idx])
+        return grid_to_px(7, 7)  # fallback centro
+    # Track circular (0-63)
     real = (pos_rel + PLAYER_OFFSET.get(color, 0)) % 64
-    col, row = TRACK_GRID[real]
-    return grid_to_px(col, row)
+    return grid_to_px(*TRACK_GRID[real])
 
 # ---------------------------------------------------------------------------
 # SEÑAL PUENTE
@@ -199,9 +196,9 @@ class BoardWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedSize(BOARD_SIZE, BOARD_SIZE)
-        self.players        = []
-        self.my_color       = None
-        self.selected_piece = None
+        self.players             = []
+        self.my_color            = None
+        self.selected_piece      = None
         self.on_piece_selected_cb = None
         _init_pixmaps()
 
@@ -237,10 +234,10 @@ class BoardWidget(QWidget):
         jail_indices = {c:0 for c in ("red","blue","green","yellow")}
 
         for player in all_players:
-            cname  = player.get("color","red")
-            color  = PLAYER_COLORS.get(cname, C_RED)
-            pieces = player.get("pieces",[-1,-1,-1,-1])
-            pixmap = PIECE_PIXMAPS.get(cname)
+            cname   = player.get("color","red")
+            color   = PLAYER_COLORS.get(cname, C_RED)
+            pieces  = player.get("pieces",[-1,-1,-1,-1])
+            pixmap  = PIECE_PIXMAPS.get(cname)
             is_deco = cname not in active_colors
 
             pos_count = {}
@@ -261,6 +258,11 @@ class BoardWidget(QWidget):
                     coords = pos_to_px(cname, pos)
                     if coords is None: continue
                     bx,by = coords
+                    # Fichas en meta (pos==70): distribuir en 2x2 fijo
+                    if pos >= FINAL_PATH:
+                        meta_off = [(-10,-10),(10,-10),(-10,10),(10,10)]
+                        ox,oy = meta_off[i % 4]
+                        bx+=ox; by+=oy
 
                 if pos != -1 and pos_count.get(pos,1) > 1:
                     slot = pos_slot.get(pos,0)
@@ -300,8 +302,7 @@ class BoardWidget(QWidget):
                                Qt.AlignCenter, str(i+1))
 
     def mousePressEvent(self, event):
-        if self.my_color is None:
-            return
+        if self.my_color is None: return
         C      = CELL
         radius = int(C*0.48) + 20
         mx,my  = event.x(), event.y()
@@ -322,9 +323,7 @@ class BoardWidget(QWidget):
                     if coords is None: continue
                     px_,py_ = coords
 
-                dist2 = (mx-px_)**2+(my-py_)**2
-
-                if dist2 <= radius**2:
+                if (mx-px_)**2+(my-py_)**2 <= radius**2:
                     self.selected_piece = i
                     self.update()
                     if self.on_piece_selected_cb:
@@ -352,7 +351,6 @@ class GameWindow(QMainWindow):
         self._build_ui()
         self._connect()
 
-    # ── UI ────────────────────────────────────────────────────────────
     def _build_ui(self):
         self.setWindowTitle(f"Parqués — {self.player_name}")
         self.setStyleSheet("background-color: #2b1a0a;")
@@ -376,7 +374,6 @@ class GameWindow(QMainWindow):
         self.lbl_status.setAlignment(Qt.AlignCenter)
         self.lbl_status.setWordWrap(True)
 
-        # Dados
         dice_frame = QFrame()
         dice_frame.setStyleSheet("background:#4a2c00;border-radius:8px;padding:4px;")
         dl = QHBoxLayout(dice_frame)
@@ -391,7 +388,6 @@ class GameWindow(QMainWindow):
             self.dice_labels.append(lbl)
             dl.addWidget(lbl)
 
-        # Botón lanzar
         self.btn_roll = QPushButton("🎲  Lanzar dados")
         self.btn_roll.setFont(QFont("Georgia",11,QFont.Bold))
         self.btn_roll.setFixedHeight(40)
@@ -399,7 +395,6 @@ class GameWindow(QMainWindow):
         self.btn_roll.clicked.connect(self._roll_dice)
         self.btn_roll.setEnabled(False)
 
-        # Panel de movimiento
         self.lbl_piece = QLabel("Clic en una ficha para seleccionarla")
         self.lbl_piece.setFont(QFont("Georgia",9))
         self.lbl_piece.setStyleSheet("color:#d4a96a;")
@@ -407,8 +402,7 @@ class GameWindow(QMainWindow):
         self.lbl_piece.setAlignment(Qt.AlignCenter)
 
         self.move_frame = QFrame()
-        self.move_frame.setStyleSheet(
-            "background:#4a2c00;border-radius:6px;padding:2px;")
+        self.move_frame.setStyleSheet("background:#4a2c00;border-radius:6px;padding:2px;")
         self.move_layout = QVBoxLayout(self.move_frame)
         self.move_layout.setContentsMargins(4,4,4,4)
         self.move_layout.setSpacing(4)
@@ -433,7 +427,7 @@ class GameWindow(QMainWindow):
         self.log_scroll = QScrollArea()
         self.log_scroll.setWidget(self.log_content)
         self.log_scroll.setWidgetResizable(True)
-        self.log_scroll.setFixedHeight(160)
+        self.log_scroll.setFixedHeight(240)
         self.log_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.log_scroll.setStyleSheet("""
             QScrollArea{background:#2b1a0a;border:1px solid #7a4010;border-radius:6px;}
@@ -470,7 +464,6 @@ class GameWindow(QMainWindow):
             QPushButton:disabled{{background:#3d2208;color:#7a5030;}}
         """
 
-    # ── Conexión ──────────────────────────────────────────────────────
     def _connect(self):
         self.client = GameClient(
             "ws://127.0.0.1:8765",
@@ -479,7 +472,6 @@ class GameWindow(QMainWindow):
         self.client.send_action("join", player_name=self.player_name)
         self.client.send_action("get_my_id")
 
-    # ── Acciones ──────────────────────────────────────────────────────
     def _roll_dice(self):
         self.client.send_action("roll_dice")
 
@@ -487,11 +479,12 @@ class GameWindow(QMainWindow):
         self.client.send_action("get_state")
 
     def on_piece_selected(self, idx):
-        if not self._is_my_turn() or self.dice_moves is None:
-            return
         self.selected_piece = idx
         self.lbl_piece.setText(f"Ficha {idx+1} seleccionada")
-        self._show_move_buttons()
+        if self.dice_moves is not None:
+            self._show_move_buttons()
+        else:
+            self._log("⚠ Lanza los dados primero.")
 
     def _show_move_buttons(self):
         while self.move_layout.count():
@@ -505,23 +498,47 @@ class GameWindow(QMainWindow):
         dm = self.dice_moves
         opciones = []
         if not dm.get("used_d1") and not dm.get("used_sum"):
-            opciones.append(("d1", dm["d1"], f"Mover {dm['d1']} casillas (dado 1)"))
+            opciones.append((dm["d1"], f"Mover {dm['d1']} (dado 1)"))
         if not dm.get("used_d2") and not dm.get("used_sum"):
-            opciones.append(("d2", dm["d2"], f"Mover {dm['d2']} casillas (dado 2)"))
+            opciones.append((dm["d2"], f"Mover {dm['d2']} (dado 2)"))
         if not dm.get("used_sum") and not (dm.get("used_d1") or dm.get("used_d2")):
-            opciones.append(("sum", dm["sum"], f"Mover {dm['sum']} casillas (suma)"))
+            opciones.append((dm["sum"], f"Mover {dm['sum']} (suma)"))
 
-        if not opciones:
+        # Eliminar duplicados si d1 == d2
+        seen = set()
+        opciones_unicas = []
+        for v, label in opciones:
+            if v not in seen:
+                seen.add(v)
+                opciones_unicas.append((v, label))
+
+        if not opciones_unicas:
             self.move_frame.setVisible(False)
             return
 
-        for move_type, value, label in opciones:
+        # Info de los dados
+        d1, d2 = self.dice_moves["d1"], self.dice_moves["d2"]
+        info = QLabel(f"🎲 {d1} + {d2} = {d1+d2}{'  (par)' if d1==d2 else ''}")
+        info.setFont(QFont("Georgia", 8))
+        info.setStyleSheet("color:#d4a96a; background:transparent;")
+        info.setAlignment(Qt.AlignCenter)
+        self.move_layout.insertWidget(0, info)
+
+        for value, label in opciones_unicas:
             btn = QPushButton(label)
-            btn.setFont(QFont("Georgia", 9, QFont.Bold))
-            btn.setFixedHeight(34)
+            btn.setFont(QFont("Georgia", 10, QFont.Bold))
+            btn.setFixedHeight(36)
             btn.setStyleSheet(self._btn_style("#5a3010"))
             btn.clicked.connect(lambda _, v=value: self._do_move(v))
             self.move_layout.addWidget(btn)
+
+        # Nota al pie
+        nota = QLabel("Puedes usar cada dado en una ficha distinta")
+        nota.setFont(QFont("Georgia", 7))
+        nota.setStyleSheet("color:#7a5030; background:transparent;")
+        nota.setWordWrap(True)
+        nota.setAlignment(Qt.AlignCenter)
+        self.move_layout.addWidget(nota)
 
         self.move_frame.setVisible(True)
 
@@ -549,6 +566,14 @@ class GameWindow(QMainWindow):
 
     # ── Respuestas servidor ───────────────────────────────────────────
     def _handle_response(self, data):
+        # Desconexión del oponente
+        if data.get("_disconnected"):
+            if self.game_state not in ("finished",):
+                QMessageBox.warning(self, "Desconexión",
+                    "El oponente se ha desconectado.
+La partida ha terminado.")
+            return
+
         if "id"             in data: self.my_id             = data["id"]
         if "current_player" in data: self.current_player_id = data["current_player"]
         if "game_state"     in data: self.game_state        = data["game_state"]
@@ -557,7 +582,19 @@ class GameWindow(QMainWindow):
             self._update_from_board(data["board_state"])
 
         if "players" in data and "board_state" not in data:
+            # Detectar capturas comparando posiciones anteriores con las nuevas
+            old_pieces = {pl.get("color"): list(pl.get("pieces",[])) 
+                         for pl in self.players_info}
             self._sync_players(data["players"])
+            # Verificar si alguna ficha volvió a cárcel (-1)
+            for pl in self.players_info:
+                color = pl.get("color")
+                if not color or color == self.my_color: continue
+                old = old_pieces.get(color, [])
+                new = pl.get("pieces", [])
+                for i, (o, n) in enumerate(zip(old, new)):
+                    if o != -1 and n == -1:
+                        self._log(f"💥 ¡Ficha {i+1} {color} enviada a la cárcel!")
 
         if "dice" in data:
             d1, d2 = int(data["dice"][0]), int(data["dice"][1])
@@ -575,8 +612,6 @@ class GameWindow(QMainWindow):
                     }
                     self._log("♟ Haz clic en una ficha para moverla.")
 
-
-
         if "dice_moves" in data:
             self.dice_moves = data["dice_moves"]
             if self.selected_piece is not None and self.dice_moves:
@@ -584,23 +619,19 @@ class GameWindow(QMainWindow):
             else:
                 self.move_frame.setVisible(False)
 
-        if "board_state" in data or "players" in data:
-            self._log_positions()
-
         if "warning" in data: self._log(f"⚠ {data['warning']}")
         if "error"   in data: self._log(f"❌ {data['error']}")
         if "message" in data: self._log(f"ℹ {data['message']}")
 
         self._refresh_status()
 
+        # FIX 2: Mensaje de victoria mejorado visualmente
         if self.game_state == "finished" or "winner" in data:
             winner_id = data.get("winner","")
             if winner_id == self.my_id:
-                QMessageBox.information(self,"🏆 ¡Ganaste!",
-                    "¡Felicitaciones! ¡Llevaste todas tus fichas a la meta!")
-            else:
-                QMessageBox.information(self,"Fin del juego",
-                    "El otro jugador ganó la partida.")
+                self._show_win_dialog(won=True)
+            elif winner_id:
+                self._show_win_dialog(won=False)
 
     def _sync_players(self, players):
         self.players_info = players
@@ -668,6 +699,68 @@ class GameWindow(QMainWindow):
                 lbl.setPixmap(QPixmap())
                 lbl.setText(EMOJI.get(val,"🎲"))
 
+    # ── FIX 2: Diálogo de victoria mejorado ──────────────────────────
+    def _show_win_dialog(self, won: bool):
+        dialog = QMessageBox(self)
+        dialog.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
+
+        if won:
+            dialog.setWindowTitle("🏆 ¡Victoria!")
+            dialog.setText(
+                "<div style='text-align:center;'>"
+                "<p style='font-size:48px; margin:0;'>🏆</p>"
+                "<p style='font-size:22px; font-weight:bold; color:#f5c518; "
+                "font-family:Georgia;'>¡GANASTE!</p>"
+                "<p style='font-size:13px; color:#f5e6c8; font-family:Georgia;'>"
+                "¡Felicitaciones! Llevaste todas<br>tus fichas a la meta.</p>"
+                "</div>"
+            )
+            dialog.setStyleSheet("""
+                QMessageBox {
+                    background-color: #2b1a0a;
+                    border: 3px solid #f5c518;
+                    border-radius: 12px;
+                }
+                QLabel { color: #f5e6c8; }
+                QPushButton {
+                    background: #f5c518; color: #2b1a0a;
+                    font-family: Georgia; font-weight: bold;
+                    font-size: 13px; border-radius: 8px;
+                    padding: 8px 28px; min-width: 100px;
+                }
+                QPushButton:hover { background: #ffd700; }
+            """)
+        else:
+            dialog.setWindowTitle("Fin del juego")
+            dialog.setText(
+                "<div style='text-align:center;'>"
+                "<p style='font-size:42px; margin:0;'>😔</p>"
+                "<p style='font-size:18px; font-weight:bold; color:#d4a96a; "
+                "font-family:Georgia;'>El oponente ganó</p>"
+                "<p style='font-size:12px; color:#c8a060; font-family:Georgia;'>"
+                "Mejor suerte la próxima vez.</p>"
+                "</div>"
+            )
+            dialog.setStyleSheet("""
+                QMessageBox {
+                    background-color: #2b1a0a;
+                    border: 3px solid #7a4010;
+                    border-radius: 12px;
+                }
+                QLabel { color: #f5e6c8; }
+                QPushButton {
+                    background: #7a4010; color: #f5e6c8;
+                    font-family: Georgia; font-weight: bold;
+                    font-size: 13px; border-radius: 8px;
+                    padding: 8px 28px; min-width: 100px;
+                }
+                QPushButton:hover { background: #a0541a; }
+            """)
+
+        dialog.setStandardButtons(QMessageBox.Ok)
+        dialog.exec_()
+
+    # ── FIX 3: log de posiciones corregido (sin afectar lógica) ──────
     def _log_positions(self):
         for pl in self.players_info:
             nombre = pl.get("name", pl.get("color","?"))
@@ -680,12 +773,13 @@ class GameWindow(QMainWindow):
                 elif pos >= FINAL_PATH:
                     partes.append(f"F{i+1}:meta")
                 else:
-                    real = (pos + PLAYER_OFFSET.get(color, 0)) % 64
-                    partes.append(f"F{i+1}:casilla {real}")
-            self._log(f"📍 {nombre}: {', '.join(partes)}")
+                    partes.append(f"F{i+1}:pos{pos}")
+            self._log(f"📍 {nombre}({color}): {', '.join(partes)}")
 
     def _log(self, msg):
         self.log_lines.append(msg)
+        if len(self.log_lines) > 35:
+            self.log_lines = self.log_lines[-35:]
         self.log_content.setText("\n".join(self.log_lines))
         self.log_scroll.verticalScrollBar().setValue(
             self.log_scroll.verticalScrollBar().maximum())
