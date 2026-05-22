@@ -38,7 +38,7 @@ PLAYER_COLORS = {"red":C_RED,"blue":C_BLUE,"green":C_GREEN,"yellow":C_YELLOW}
 # ---------------------------------------------------------------------------
 
 TRACK_GRID = [
-    (18.05, 23.68),  # 0  - salida roja
+    (18.86, 23.68),  # 0  - salida roja
     (19.0, 22.36 ),  # 1
     (19.18, 21.45),  # 2
     (19.45, 20.32),  # 3
@@ -72,7 +72,7 @@ TRACK_GRID = [
     (10.86,  1.91),  # 31
     (10.86,  3.18),  # 32
     (10.86,  4.45),  # 33 
-    (10.05,  5.68),  # 34  <- salida azul  (PLAYER_OFFSET blue = 34)
+    (10.55,  5.36),  # 34  <- salida azul  (PLAYER_OFFSET blue = 34)
     (11.18,  7.05),  # 35
     (10.91,  8.23),  # 36
     (10.32,  9.32),  # 37
@@ -370,7 +370,7 @@ class GameWindow(QMainWindow):
         self._connect()
 
     def _build_ui(self):
-        self.setWindowTitle(f"Parqués — {self.player_name}")
+        self.setWindowTitle(f"PyParqués — {self.player_name}")
         self.setStyleSheet("background-color: #2b1a0a;")
         self.board = BoardWidget()
 
